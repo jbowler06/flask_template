@@ -13,3 +13,7 @@ from flask import send_from_directory
 @app.route('/index')
 def index():
     return render_template('index.html')
+
+@app.route('/getLine', methods=['GET','POST'])
+def getLine():
+    return jsonify({'points': [0,0,0,0.2,0.2,0,0.5,0.3,0]})

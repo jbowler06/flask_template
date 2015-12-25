@@ -85,7 +85,7 @@
                     line.itemSize, gl.FLOAT, false, 0, 0);
 
             gl.drawArrays(
-                    gl.LINE_LOOP, 0,line.numItems);
+                    gl.LINE_STRIP,0,line.numItems);
         }
 
         function drawShapes(gl) {
@@ -103,11 +103,24 @@
         }
 
 
+        function _get_line() {
+            $.ajax({
+                url: '{{ url_for('.getLine', _external=True) }}',
+                type: 'POST',
+                data: {
+                    line_id: 'unk'
+                }
+            }).done(function(response) {    
+                aLine = _create_line(chartContext,response.points);
+                chartContext.render();
+            }).fail(function() {
+                alert('failed to load line data')
+            });
+        }
+
         function _doc_ready() {
             chartContext = createContext($('#chart_canvas'));
-            points = [0.0,0.0,0,0.2,0.2,0.0,0.3,0.3,0.0];
-            aLine = _create_line(chartContext,points);
-            chartContext.render();
+            _get_line();
         }
 
         $(document).ready(_doc_ready);
