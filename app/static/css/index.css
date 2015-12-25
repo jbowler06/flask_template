@@ -8,4 +8,9 @@ body {
     height: 100%;
     font-size: 300px;
     font-family: Calibri, Candara, Arial, sans-serif;
+    background-color: #000;
+}
+
+#chart {
+    border-style: solid;
 }
